@@ -1,6 +1,6 @@
-# ReactStarter
+# freeCodeCamp Recipes
 
-#### A template for my new React projects, early work in progress.
+#### A recipe collection we app for freeCodeCamp using localstorage to maintain state.
 
 Currently this starter is using
 * React
@@ -25,3 +25,5 @@ For DEV only
 For Production
 * node
 * express
+
+View a working version off this app on Heroku https://recipes.garethjeanne.com
