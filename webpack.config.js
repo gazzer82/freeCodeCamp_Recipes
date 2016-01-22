@@ -72,10 +72,14 @@ module.exports = {
     new webpack.NoErrorsPlugin(),
     new HtmlWebpackPlugin({
       template: 'underscore-template-loader!./html/index_template.html',
-      favicon: './images/favicon.ico',
+      //favicon: './images/favicon.ico',
       title: 'Recipes',
       inject: 'body',
       filename: '../index.html'
+    }),
+    new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
     })
   ]
 }
