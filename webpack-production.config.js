@@ -69,6 +69,10 @@ module.exports = {
       title: 'Recipes',
       inject: 'body',
       filename: '../index.html'
+    }),
+    new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
     })
   ]
 }
