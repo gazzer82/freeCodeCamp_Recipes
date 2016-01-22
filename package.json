@@ -2,6 +2,7 @@
   "name": "webpack-react-starter",
   "version": "1.0.1",
   "description": "A starter project for React project using Redux and Node",
+  "repository": "https://github.com/elgerlambert/redux-localstorage.git",
   "main": "index.js",
   "scripts": {
     "postinstall": "webpack --config ./webpack-production.config --progress --colors",
