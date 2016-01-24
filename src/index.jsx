@@ -7,8 +7,8 @@ import ReduxPromise from 'redux-promise';
 import App from './components/app'
 import reducers from './reducers'
 
-require('../materialize/css/materialize.css');
-require('../materialize/js/materialize.js');
+require('../vendor/materialize/css/materialize');
+require('../vendor/materialize/js/materialize.js');
 require("../style/main.scss");
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);

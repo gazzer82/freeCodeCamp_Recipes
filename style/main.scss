@@ -1,2 +1,95 @@
 //Normalise my CSS
-@import "~normalize.css/normalize.css"
+@import "~normalize.css/normalize.css";
+@import "./colors";
+
+
+//General and Fonts
+
+html{
+  background-color: $background;
+}
+
+h1{
+  color: $text-dark;
+}
+h2, h3, h4, h5, span, div {
+  color: $text;
+}
+
+//Recipe tiles
+
+.card-col-inner{
+  position: relative;
+  transform-style: preserve-3d;
+  transition: 1s ease;
+}
+
+.rotate{
+  transform: rotateY(180deg);
+}
+
+.card-col-inner-front{
+  z-index: 5;
+  transform-style: preserve-3d;
+}
+
+.card-col-inner-back{
+  position: absolute;
+  top: -0.9rem;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  transform: rotateY(180deg) translateZ(0.01px);
+  transform-style: preserve-3d;
+  perspective: 1000;
+}
+
+.recipe-header{
+  background-color: $primary-light;
+  border-radius: 2px 2px 0 0;
+}
+
+.recipe-header h5{
+  padding: 0.4em 0.4em;
+  color: $text-dark;
+}
+
+.recipe-card-panel{
+  padding: 0;
+  height: 14em;
+  color: $text;
+  transition: 0.25s ease;
+  cursor: pointer;
+}
+
+.recipe-card-body{
+  padding: 1em;
+}
+
+.recipe-card-body h5{
+  padding: 0;
+  margin: 0;
+}
+
+.card-active{
+  transform: translateZ(+5px);
+}
+
+.card-col{
+  transform-style: preserve-3d;
+  perspective: 1000;
+}
+
+//Header
+
+.header-outer{
+  background-color: $primary-light;
+  margin: 0;
+  padding: 0.5em;
+}
+
+.header-outer h4{
+  color: $text-dark;
+  margin: 0;
+  padding: 0;
+}

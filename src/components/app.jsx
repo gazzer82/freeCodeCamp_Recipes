@@ -1,14 +1,28 @@
 import React, { Component } from 'react';
-//import RaisedButton from 'material-ui/lib/raised-button';
-//import MaterialUI from 'material-ui';
-import {Button, Card, Row, Col} from 'react-materialize';
+
+import Nav from './nav.jsx';
+import RecipeCard from './card.jsx';
+
+const recipe={
+  recipeType: 'Stir-Fry',
+  recipeName: 'Orange and Beef Stir-Fry'
+}
 
 export default class App extends Component {
   render(){
     return(
     <div>
-      <h1>Hello World</h1>
-      <Button label="Default" />
+      <Nav />
+      <div className='row'>
+        <RecipeCard recipe={recipe}/>
+        <RecipeCard recipe={recipe}/>
+        <RecipeCard recipe={recipe}/>
+        <RecipeCard recipe={recipe}/>
+        <RecipeCard recipe={recipe}/>
+        <RecipeCard recipe={recipe}/>
+        <RecipeCard recipe={recipe}/>
+        <RecipeCard recipe={recipe}/>
+      </div>
     </div>
     );
   }

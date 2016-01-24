@@ -1,5 +1,11 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+
+//Auto prefixing for our CSS
+
+var autoprefixer = require('autoprefixer');
+var precss       = require('precss');
+
 console.log(__dirname);
 module.exports = {
   entry: [
@@ -37,12 +43,12 @@ module.exports = {
       {
         test: /\.scss$/,
         exclude: /(node_modules)/,
-        loader: 'style!css!sass'
+        loader: 'style!css!postcss-loader!sass'
       },
       //CSS
-      { test: /\.css$/,
-        loader: "style-loader!css-loader"
-      },
+      //{ test: /\.css$/,
+      //  loader: "style-loader!css-loader"
+      //},
       //Fonts
       {
         test: /\.(woff|woff2)$/,
@@ -74,5 +80,9 @@ module.exports = {
             $: "jquery",
             jQuery: "jquery"
     })
-  ]
+  ],
+  //config for postcss, prefix css files
+  postcss: function () {
+    return [autoprefixer];
+  }
 }
