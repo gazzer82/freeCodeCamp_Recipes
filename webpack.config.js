@@ -48,11 +48,6 @@ module.exports = {
         exclude: /(node_modules)/,
         loader: 'style!css!postcss-loader!sass'
       },
-      //CSS
-      //{ test: /\.css$/,
-      //  loader: "style!css-loader"
-      //},
-      //Fonts
       {
       test: /\.(woff|woff2)$/,
         loader: "url?limit=10000&mimetype=application/font-woff"

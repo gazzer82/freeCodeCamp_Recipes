@@ -16,34 +16,6 @@ h2, h3, h4, h5, span, div {
   color: $text;
 }
 
-//Recipe tiles
-
-.card-col-inner{
-  position: relative;
-  transform-style: preserve-3d;
-  transition: 1s ease;
-}
-
-.rotate{
-  transform: rotateY(180deg);
-}
-
-.card-col-inner-front{
-  z-index: 5;
-  transform-style: preserve-3d;
-}
-
-.card-col-inner-back{
-  position: absolute;
-  top: -0.9rem;
-  left: 0;
-  width: 100%;
-  z-index: 1;
-  transform: rotateY(180deg) translateZ(0.01px);
-  transform-style: preserve-3d;
-  perspective: 1000;
-}
-
 .recipe-header{
   background-color: $primary-light;
   border-radius: 2px 2px 0 0;
@@ -58,7 +30,7 @@ h2, h3, h4, h5, span, div {
   padding: 0;
   height: 14em;
   color: $text;
-  transition: 0.25s ease;
+  transition: 0.15s ease;
   cursor: pointer;
 }
 
@@ -92,4 +64,96 @@ h2, h3, h4, h5, span, div {
   color: $text-dark;
   margin: 0;
   padding: 0;
+}
+
+//Recipe mask
+
+.recipe-mask{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba($background,0.0);
+  z-index: 1;
+  visibility: hidden;
+  transition: 0.5s ease;
+}
+
+.recipe-mask.mask{
+  visibility: visible;
+  background: rgba($background,0.8);
+}
+
+//Recipe Slider
+
+.recipe-slider-outer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin-left: 5%;
+  width: 90%;
+  height: 100%;
+  transition: 0.5s ease;
+  z-index: 2;
+}
+
+.recipe-slider-outer.offscreen{
+  top: -100%;
+}
+
+.slider-inner{
+  background-color: grey;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.recipe-slider-row{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.recipe-slider-col{
+  height: 80%;
+  width: 100%;
+}
+
+.recipe-slider-footer-outer{
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background-color: $primary-light;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.recipe-slider-button{
+  margin-left: 2em;
+  height: 60%;
+}
+
+.recipe-slider-button span{
+  color: $text-dark;
+}
+
+//Recipe Form
+.recipe-form{
+  padding-top: 20px;
+}
+
+.recipe-form .input-field label, .recipe-form .input-field label, .recipe-form .validate, .recipe-form .materialize-textarea{
+  color: $text-dark;
+}
+
+//Add button card
+
+.add-button-panel{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
