@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDom from 'react-dom';
 
 import Nav from './nav.jsx';
 import RecipeCard from './card.jsx';
@@ -55,6 +56,7 @@ export default class App extends Component {
     this.hideRecipe = this.hideRecipe.bind(this);
     this.deleteFunction = this.deleteFunction.bind(this);
     this.addRecipe = this.addRecipe.bind(this);
+    this.scrollToTop = this.scrollToTop.bind(this);
     //this.saveState();
   }
   saveState(){
@@ -67,7 +69,8 @@ export default class App extends Component {
       newRecipe: false,
       valid: false
     }, () => {
-      this.validateRecipe()
+      this.validateRecipe();
+      this.scrollToTop();
     })
   }
   validateRecipe(){
@@ -162,7 +165,11 @@ export default class App extends Component {
         activeState: 'false'
       }, () => {
         this.validateRecipe();
+        this.scrollToTop();
       })
+  }
+  scrollToTop(){
+    window.scrollTo(0, 0)
   }
   render(){
     var overlayClass = classNames({
