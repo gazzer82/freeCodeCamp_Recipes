@@ -26,6 +26,8 @@ export default class recipeSlider extends Component {
       'recipe-slider-outer': true,
       'offscreen' : this.props.hide
   })
+  //console.log('checking if valid');
+  //console.log(this.props.valid);
     return (
       <div onClick={this.handleDivClick.bind(this)} className={sliderClass}>
         <div className='row recipe-slider-row' id='outer'>
@@ -33,7 +35,7 @@ export default class recipeSlider extends Component {
             <div className='slider-inner  z-depth-3' id='inner'>
               <RecipeForm activeState={this.props.activeState} Recipe={this.props.newRecipe} currentRecipe={this.props.currentRecipe} updateRecipe={this.props.updateRecipe}/>
               <div className='recipe-slider-footer-outer'>
-                <Button onClick={this.handleClose.bind(this)} className='recipe-slider-button close' id='close'>Done</Button>
+                <Button onClick={this.handleClose.bind(this)} className='recipe-slider-button close' disabled={!this.props.valid} id='close'>Done</Button>
                 <Button onClick={this.handleDelete.bind(this)} className='recipe-slider-button delete' id='cancel'>Delete</Button>
               </div>
             </div>

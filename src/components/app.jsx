@@ -21,28 +21,27 @@ export default class App extends Component {
       recipes = [
         {
           _id: '12345678',
-          catergory: 'Curries',
-          name: 'Chicken Curry',
-          ingredients: 'Chicken',
-          instructions: 'Cook Curry'
+          catergory: 'Desert',
+          name: 'Pumpkin Pie',
+          ingredients: 'Pumpkin Puree \nSweetened Condensed Milk \nEggs \nPumpkin Pie Spice \nPie Crust',
+          instructions: 'Combine ingredients and bake in the oven at 280f for 2 hours'
         },
         {
           _id: '12345679',
-          catergory: 'Curries',
-          name: 'Lamb Curry',
-          ingredients: 'Lamb',
-          instructions: 'Cook Curry'
+          catergory: 'Italian',
+          name: 'Spaghetti',
+          ingredients: 'Noodles \nTomato Sauce \n(Optional) Meatballs',
+          instructions: 'Cook noodles and Meetballs according to instructions, heat sauce thorougly and combine with meetballs. Plate up Spaghetti and spoon meatballs and sauce over them.'
         },
         {
           _id: '12345610',
-          catergory: 'Curries',
-          name: 'Lamb Curry',
-          ingredients: 'Chicken',
-          instructions: 'Cook Lamb'
+          catergory: 'Pie',
+          name: 'Onion Pie',
+          ingredients: 'Onion \nPie Crust',
+          instructions: 'Roll out Pie Crust and fit into pie tin. Add cooked onions to pie tin and bake in the oven for 3 hours at 270f'
         }
       ]
     } else {
-      console.log('loading recipes from local storage');
       recipes = JSON.parse(localStorage.recipes);
     }
     this.state = {
@@ -59,42 +58,77 @@ export default class App extends Component {
     //this.saveState();
   }
   saveState(){
-    console.log('saving recipes to local storage');
-    console.log(this.state.recipes);
     localStorage.recipes = JSON.stringify(this.state.recipes);
-    console.log(JSON.parse(localStorage.recipes));
   }
   showRecipe(recipe){
     this.setState({
       hideSlider: false,
       currentRecipe: recipe,
-      newRecipe: false
+      newRecipe: false,
+      valid: false
+    }, () => {
+      this.validateRecipe()
     })
   }
-  hideRecipe(){
-    if(this.state.newRecipe){
-      //First add a timestamp to the new recipe so it has a unique id
-      var currentRecipe = this.state.currentRecipe;
-      currentRecipe._id = (new Date).getTime();
-      //get all the current recipes and add the new ones to it
-      var recipes = this.state.recipes;
-      recipes.push(currentRecipe);
-      //Update the state
+  validateRecipe(){
+    if(
+      typeof this.state.currentRecipe.catergory === 'string' &&
+      typeof this.state.currentRecipe.name === 'string' &&
+      typeof this.state.currentRecipe.ingredients === 'string' &&
+      typeof this.state.currentRecipe.instructions === 'string'
+    ){
+      if(
+        this.state.currentRecipe.catergory.length > 0 &&
+        this.state.currentRecipe.name.length  > 0 &&
+        this.state.currentRecipe.ingredients.length  > 0 &&
+        this.state.currentRecipe.instructions.length  > 0
+      ){
+        console.log('recipe is valid');
+        this.setState({
+          valid: true
+        })
+      } else {
+        console.log('recipe is invalid');
+        this.setState({
+          valid: false
+        })
+      }
+    } else {
+      console.log('recipe is invalid');
       this.setState({
-        recipes: recipes,
-        currentRecipe: {}
-      }, () => {
-        this.saveState();
-      });
+        valid: false
+      })
     }
-    this.setState({
-      hideSlider: true
-    });
+  }
+  hideRecipe(){
+    if(this.state.valid){
+      if(this.state.newRecipe){
+        //First add a timestamp to the new recipe so it has a unique id
+        var currentRecipe = this.state.currentRecipe;
+        currentRecipe._id = (new Date).getTime();
+        //get all the current recipes and add the new ones to it
+        var recipes = this.state.recipes;
+        recipes.push(currentRecipe);
+        //Update the state
+        this.setState({
+          recipes: recipes,
+          currentRecipe: {}
+        }, () => {
+          this.saveState();
+        });
+      }
+      this.setState({
+        hideSlider: true
+      });
+    } else {
+      console.log('recipe is not valid');
+    }
   }
   updateRecipe(currentRecipe){
     this.setState({
       currentRecipe
     },() => {
+      this.validateRecipe()
       this.saveState()
     });
   }
@@ -116,12 +150,19 @@ export default class App extends Component {
     });
   }
   addRecipe(){
-    this.setState({
-      newRecipe: true,
-      hideSlider: false,
-      currentRecipe: {},
-      activeState: 'false'
-    })
+      this.setState({
+        newRecipe: true,
+        hideSlider: false,
+        currentRecipe: {
+          type: undefined,
+          name: undefined,
+          ingredients: '',
+          instructions: ''
+        },
+        activeState: 'false'
+      }, () => {
+        this.validateRecipe();
+      })
   }
   render(){
     var overlayClass = classNames({
@@ -135,7 +176,7 @@ export default class App extends Component {
           {this.renderRecipeCards()}
           <AddCard addRecipe={this.addRecipe}/>
         </div>
-        <RecipeSlider activeState={this.state.activeState} className='recipe-slider-master' updateRecipe={this.updateRecipe.bind(this)} hide={this.state.hideSlider} currentRecipe={this.state.currentRecipe} hideFunction={this.hideRecipe} deleteFunction={this.deleteFunction} newRecipe={this.state.newRecipe}/>
+        <RecipeSlider activeState={this.state.activeState} className='recipe-slider-master' updateRecipe={this.updateRecipe.bind(this)} hide={this.state.hideSlider} currentRecipe={this.state.currentRecipe} hideFunction={this.hideRecipe} deleteFunction={this.deleteFunction} newRecipe={this.state.newRecipe} valid={this.state.valid}/>
         <div className={overlayClass}></div>
       </div>
     );
